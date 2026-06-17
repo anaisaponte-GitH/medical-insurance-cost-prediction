@@ -4,23 +4,20 @@
 
 This project applies Machine Learning regression techniques to predict individual medical insurance costs based on demographic and lifestyle factors.
 
-Accurate cost prediction can help insurance companies better estimate risk, improve pricing strategies, and support data-driven decision-making.
-
-The project explores multiple modeling approaches and optimization techniques to evaluate whether predictive performance can be improved beyond a baseline Linear Regression model.
+Beyond building a predictive model, the project focuses on understanding the impact of different variables on healthcare expenses and evaluating whether more advanced optimization techniques provide meaningful improvements over a baseline Linear Regression model.
 
 ---
 
 ## Business Problem
 
-Medical insurance providers need reliable estimates of future healthcare costs in order to:
+Medical insurance providers need reliable estimates of future healthcare costs to:
 
 - Assess customer risk profiles.
 - Improve premium pricing strategies.
 - Forecast potential expenses.
-- Optimize resource allocation.
 - Support data-driven underwriting decisions.
 
-This project demonstrates how Machine Learning can be used to model and predict insurance charges using customer-related attributes.
+This project demonstrates how Machine Learning can be used to model insurance charges using customer-related attributes.
 
 ---
 
@@ -28,7 +25,7 @@ This project demonstrates how Machine Learning can be used to model and predict 
 
 The project uses a medical insurance dataset containing demographic and health-related information.
 
-Examples of features include:
+### Features
 
 - Age
 - Sex
@@ -58,31 +55,69 @@ The dataset was explored to understand:
 
 Data preprocessing included:
 
+- Duplicate validation.
 - Categorical feature encoding.
 - Train/Test split.
-- Feature scaling.
-- Dataset transformation and preparation for modeling.
+- Feature scaling experiments.
+- Dataset preparation for modeling.
 
-### 3. Baseline Linear Regression Model
+### 3. Baseline Model
 
 A Linear Regression model was trained as the initial benchmark.
 
-The objective was to evaluate how well a simple regression approach could explain variations in insurance costs.
+The objective was to evaluate how effectively a simple regression approach could explain variations in insurance costs.
 
 ### 4. Model Optimization
 
-Several optimization strategies were explored:
+Several optimization strategies were evaluated:
 
-- Feature selection.
+- Feature removal.
 - Feature scaling.
 - Logarithmic transformation of the target variable.
-- Ridge Regression regularization.
+- Lasso Regression.
+- Ridge Regression.
 
 ### 5. Model Comparison
 
 Different approaches were compared to determine whether additional complexity improved predictive performance.
 
-The results showed that the baseline model already provided strong predictive capabilities and that more complex transformations produced only marginal improvements.
+---
+
+## Model Evaluation
+
+### Performance Comparison (R² Score)
+
+| Model | R² Score |
+|---------|---------:|
+| Original Linear Regression | 0.81 |
+| Without Sex Feature | 0.81 |
+| Scaled Model | 0.81 |
+| Lasso (Log + Scaled) | 0.67 |
+| Linear Regression (Log) | 0.71 |
+| Ridge (Log + Scaled) | 0.72 |
+
+### Final Model Selection
+
+After evaluating multiple optimization strategies, the original Linear Regression model was selected as the final solution.
+
+Although feature scaling, logarithmic transformations and regularization techniques were explored, none provided a meaningful improvement over the baseline model when evaluated in the original business scale.
+
+The final model offered the best balance between:
+
+- Predictive performance
+- Simplicity
+- Interpretability
+- Business usability
+
+---
+
+## Key Findings
+
+- Smoking status was the strongest predictor of insurance costs.
+- Age and BMI showed a significant relationship with healthcare expenses.
+- The baseline Linear Regression model already achieved strong predictive performance.
+- More complex transformations introduced additional complexity without delivering substantial business value.
+- Simpler and interpretable models can often outperform more sophisticated alternatives in real-world scenarios.
 
 ---
 
@@ -90,13 +125,22 @@ The results showed that the baseline model already provided strong predictive ca
 
 The project demonstrated that Linear Regression can effectively model medical insurance costs using a relatively small set of demographic and lifestyle variables.
 
-Several optimization techniques were tested, including Ridge Regression and logarithmic transformations, but none significantly outperformed the baseline model.
+A key insight from the analysis was that optimization techniques should not be adopted solely because they are more advanced. Their value must be justified through measurable improvements in predictive performance and business outcomes.
 
-### Key Insight
+---
 
-One of the strongest predictors of insurance costs was smoking status, highlighting the significant impact of lifestyle factors on healthcare expenses.
+## Model Deployment
 
-The analysis also showed that simpler models can often provide performance comparable to more complex alternatives while remaining easier to interpret.
+The selected model was exported as a `.sav` file and later used as the foundation for an interactive Streamlit application that allows users to estimate medical insurance costs through a web interface.
+
+This project therefore covers the complete Machine Learning workflow:
+
+- Data exploration
+- Feature engineering
+- Model training
+- Model evaluation
+- Model selection
+- Model deployment
 
 ---
 
@@ -110,14 +154,9 @@ The analysis also showed that simpler models can often provide performance compa
 - Seaborn
 - Linear Regression
 - Ridge Regression
-
----
-
-## Model Deployment
-
-The predictive model developed in this project was later used as the foundation for an interactive Streamlit application, allowing users to estimate medical insurance costs through a web interface.
-
-This demonstrates the complete journey from data analysis and model development to deployment and user interaction.
+- Lasso Regression
+- Joblib
+- Jupyter Notebook
 
 ---
 
@@ -128,11 +167,11 @@ medical-insurance-cost-prediction/
 │
 ├── README.md
 │
-├── src/
-│   └── 02-linear-regression-medical-insurance-cost.ipynb
+├── raw/
+│   └── medical_insurance_cost.csv
 │
-└── raw/
-    └── medical_insurance_cost.csv
+└── src/
+    └── 02-linear-regression-medical-insurance-cost.ipynb
 ```
 
 ---
@@ -142,11 +181,10 @@ medical-insurance-cost-prediction/
 - End-to-end Machine Learning workflow.
 - Regression modeling for cost prediction.
 - Feature engineering and preprocessing.
-- Linear Regression optimization.
-- Ridge Regression regularization.
-- Model comparison and evaluation.
-- Translating predictive analytics into business value.
-- Deploying Machine Learning solutions through Streamlit.
+- Model evaluation and comparison.
+- Business-oriented model selection.
+- Translating predictive analytics into actionable insights.
+- Preparing models for deployment in production environments.
 
 ---
 
